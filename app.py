@@ -14,7 +14,7 @@ writer = pd.ExcelWriter('demog_tables.xlsx', engine='xlsxwriter')
 for i in range(1,5):
     try:
         filename = "\Screenshot_" + str(i) + ".png" # name of screenshots, numbered sequentially
-        tex = pytesseract.image_to_string(Image.open(s_filepath + filename)) # opening from saved location
+        tex = pytesseract.image_to_string(Image.open(s_filepath + filename), config="digits") # opening from saved location
         df = pd.DataFrame([tex.split(' ') for tex in tex.split('\n')]).dropna()
         df.to_excel(writer, sheet_name='Sheet_' + str(i), index=False)
         print("Table " + str(i) + " done")
